@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.workshopmongo.domain.User;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/users")
 public class UserResource {
 	
 	@RequestMapping(method = RequestMethod.GET)
