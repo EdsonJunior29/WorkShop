@@ -32,7 +32,14 @@ public class UserService {
 		return userRepository.insert(obj);
 	}
 	
+	
 	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+	}
+	
+	public void delete(String id) {
+		//Se o Id não for localizado, usará a excessao criada no método findById.
+		findById(id);
+		userRepository.deleteById(id);
 	}
 }
