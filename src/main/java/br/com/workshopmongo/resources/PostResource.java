@@ -1,5 +1,6 @@
 package br.com.workshopmongo.resources;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -30,10 +31,21 @@ public class PostResource {
 	}
 	
 	@RequestMapping(value = "/titlesearch" , method = RequestMethod.GET)
-	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "test" , defaultValue = "") String text){
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text" , defaultValue = "") String text){
 		text = URL.decodePara(text);
 		List<Post> list = postService.findByTitle(text);
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@RequestMapping(value = "/fullsearch" , method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> fullsearch(
+		@RequestParam(value = "text" , defaultValue = "") String text,
+		@RequestParam(value = "dateMin" , defaultValue = "") String dateMin,
+		@RequestParam(value = "dateMax" , defaultValue = "") String dateMax){
+		text = URL.decodePara(text);
+		Date min = URL.convertDate(dateMin, new Date(0L));
+		Date max =URL.convertDate(dateMax, new Date());
+		List<Post> list = postService.fullsearch(text, min, max);
+		return ResponseEntity.ok().body(list);
+	}
 }
