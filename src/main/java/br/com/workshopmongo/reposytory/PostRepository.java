@@ -10,6 +10,6 @@ import br.com.workshopmongo.domain.Post;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String>{
 	
-	List<Post> findBytitleContaining(String text);
+	List<Post> findBytitleContainingIgnoreCase(String text);
 
 }
